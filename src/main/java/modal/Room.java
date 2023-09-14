@@ -13,12 +13,7 @@ public class Room {
     private long id ;
     private int roomNumber;
     private double price;
-    private enum RoomType{
-        SINGLE,
-        DOUBLE,
-        DELUXE
-    };
-
+    private RoomType roomType;
 
 
 }
