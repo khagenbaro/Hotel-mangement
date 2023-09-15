@@ -20,9 +20,7 @@ public class HotelDTO {
 
     private String state;
 
-
     private Address address;
-
 
     private List<Room> rooms;
 }

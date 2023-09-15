@@ -11,10 +11,13 @@ public class Room {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id ;
-    private int roomNumber;
-    private double price;
-    private String hotelName;
-    private RoomType roomType;
 
+    private int roomNumber;
+
+    private double price;
+
+    private String hotelName;
+
+    private RoomType roomType;
 
 }
