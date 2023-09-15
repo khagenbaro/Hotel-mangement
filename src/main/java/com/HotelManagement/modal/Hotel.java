@@ -17,8 +17,11 @@ public class Hotel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long hotelId;
+
     private String hotelName;
+
     private String city;
+
     private String state;
 
     @OneToOne(cascade = CascadeType.ALL)
