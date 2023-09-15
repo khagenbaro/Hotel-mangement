@@ -1,4 +1,4 @@
-package modal;
+package com.HotelManagement.modal;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.*;
@@ -13,6 +13,7 @@ public class Room {
     private long id ;
     private int roomNumber;
     private double price;
+    private String hotelName;
     private RoomType roomType;
 
 
