@@ -2,7 +2,11 @@ package com.HotelManagement.mapper;
 
 import com.HotelManagement.dto.RoomDTO;
 import com.HotelManagement.modal.Room;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import org.springframework.stereotype.Component;
 
+@Component
 public class RoomMapper {
     public RoomDTO entityToDTO(Room room){
         RoomDTO roomDTO = new RoomDTO();
