@@ -13,4 +13,5 @@ public interface HotelService {
     Optional<Hotel> getHotelById(long id);
     String addHotel(HotelDTO hotelDto);
     String deleteHotel(long id);
+
 }

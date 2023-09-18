@@ -1,9 +1,10 @@
-package com.HotelManagement.services;
+package com.HotelManagement.services.impl;
 
 import com.HotelManagement.dto.HotelDTO;
 import com.HotelManagement.mapper.HotelMapper;
 import com.HotelManagement.modal.Hotel;
 import com.HotelManagement.repository.HotelRepository;
+import com.HotelManagement.services.HotelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -59,4 +60,5 @@ public class HotelServiceImpl implements HotelService {
             throw new RuntimeException(e.getMessage());
         }
     }
+
 }

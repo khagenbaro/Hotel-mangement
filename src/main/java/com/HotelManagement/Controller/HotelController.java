@@ -5,17 +5,14 @@ import com.HotelManagement.modal.Hotel;
 import com.HotelManagement.services.HotelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
 
 @RestController
 @RequestMapping("/hotel")
-public class HptelController {
+public class HotelController {
     @Autowired
     private HotelService hotelService;
     @GetMapping("getAllHotels")
@@ -24,14 +21,20 @@ public class HptelController {
         return ResponseEntity.ok(hotelList);
     }
     @PostMapping("/addHotel")
-    public ResponseEntity<String > addHotel(HotelDTO hotelDTO){
+    public ResponseEntity<String > addHotel(@RequestBody HotelDTO hotelDTO){
         String result = hotelService.addHotel(hotelDTO);
         return  ResponseEntity.ok(result);
     }
     @GetMapping("/getHotelById")
-    public ResponseEntity<Optional<Hotel>> getHotelById(long id){
+    public ResponseEntity<Optional<Hotel>> getHotelById(@RequestParam  long id){
         Optional<Hotel> hotel = hotelService.getHotelById(id);
         return  ResponseEntity.ok(hotel);
     }
+    @DeleteMapping("/deleteHotel")
+    public ResponseEntity<String> deleteHotelById(@RequestParam long id){
+        String result = hotelService.deleteHotel(id);
+        return ResponseEntity.ok(result);
+    }
+
 
 }

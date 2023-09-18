@@ -1,4 +1,4 @@
-package com.HotelManagement.services;
+package com.HotelManagement.services.impl;
 
 import com.HotelManagement.dto.RoomDTO;
 import com.HotelManagement.mapper.RoomMapper;
@@ -6,6 +6,7 @@ import com.HotelManagement.modal.Hotel;
 import com.HotelManagement.modal.Room;
 import com.HotelManagement.repository.HotelRepository;
 import com.HotelManagement.repository.RoomRepository;
+import com.HotelManagement.services.RoomService;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,6 +55,22 @@ public class RoomServiceImpl implements RoomService {
     @Override
     public List<Room> getAllRooms() {
         return roomRepository.findAll();
+    }
+
+    @Override
+    public Optional<Room> getRoomById(long id) {
+        try{
+            Optional<Room> room = roomRepository.findById(id);
+            if(!room.isEmpty()){
+                return room;
+            }
+            else{
+                throw  new RuntimeException("Not valid id");
+            }
+        }
+        catch (Exception e){
+            throw  new RuntimeException(e.getMessage());
+        }
     }
 
     @Override

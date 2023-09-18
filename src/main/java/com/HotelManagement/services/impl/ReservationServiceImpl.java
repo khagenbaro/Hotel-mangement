@@ -1,9 +1,10 @@
-package com.HotelManagement.services;
+package com.HotelManagement.services.impl;
 
 import com.HotelManagement.dto.ReservationDTO;
 import com.HotelManagement.mapper.ReservationMapper;
 import com.HotelManagement.modal.Reservation;
 import com.HotelManagement.repository.ReservationRepository;
+import com.HotelManagement.services.ReservationService;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,7 @@ import java.util.Optional;
 @Service
 @AllArgsConstructor
 @NoArgsConstructor
-public class ReservationServiceImpl implements   ReservationService{
+public class ReservationServiceImpl implements ReservationService {
     @Autowired
     private ReservationRepository reservationRepository;
     private ReservationMapper reservationMapper;
