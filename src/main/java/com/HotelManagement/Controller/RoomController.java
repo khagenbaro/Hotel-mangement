@@ -3,8 +3,6 @@ package com.HotelManagement.Controller;
 import com.HotelManagement.dto.RoomDTO;
 import com.HotelManagement.modal.Room;
 import com.HotelManagement.services.RoomService;
-import jakarta.annotation.security.PermitAll;
-import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,7 +18,7 @@ public class RoomController {
     @Autowired
     private RoomService roomService;
 
-    @GetMapping("/getRooms")
+    @GetMapping("/getAllRooms")
     public ResponseEntity<List<Room>> getRooms(){
         List<Room> rooms = roomService.getAllRooms();
         return ResponseEntity.ok(rooms);
@@ -36,5 +34,10 @@ public class RoomController {
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error occurred: " + e.getMessage());
         }
+    }
+    @DeleteMapping("/deleteRoomById")
+    public ResponseEntity<String> deleteRoom(@RequestParam long id){
+        String result = roomService.deleteRoomById(id);
+        return ResponseEntity.ok(result);
     }
 }

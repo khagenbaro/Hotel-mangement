@@ -14,7 +14,7 @@ public class HotelMapper {
         hotelDTO.setState(hotel.getState());
         return  hotelDTO;
     }
-    public Hotel entityToDTO(HotelDTO hotelDto){
+    public Hotel dtoToEntity(HotelDTO hotelDto){
         Hotel hotel = new Hotel();
         hotel.setHotelId(hotelDto.getHotelId());
         hotel.setHotelName(hotelDto.getHotelName());
