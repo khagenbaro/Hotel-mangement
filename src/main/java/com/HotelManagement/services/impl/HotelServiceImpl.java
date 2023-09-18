@@ -5,22 +5,35 @@ import com.HotelManagement.mapper.HotelMapper;
 import com.HotelManagement.modal.Hotel;
 import com.HotelManagement.repository.HotelRepository;
 import com.HotelManagement.services.HotelService;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Service
-
+@NoArgsConstructor
+@AllArgsConstructor
 public class HotelServiceImpl implements HotelService {
     @Autowired
     private HotelRepository hotelRepository;
+
     @Autowired
     private HotelMapper hotelMapper;
     @Override
-    public List<Hotel> getAllHotels() {
-        return hotelRepository.findAll();
+    public List<HotelDTO> getAllHotels() {
+        List<HotelDTO> hotelDTOList = new ArrayList<>();
+        List<Hotel>  hotelList = hotelRepository.findAll();
+        /*
+        * Convert each hotel to dto and return the list finally*/
+        for(Hotel hotel:hotelList){
+            HotelDTO hotelDTO = hotelMapper.entityToDTO(hotel);
+            hotelDTOList.add(hotelDTO);
+        }
+        return hotelDTOList;
     }
 
     @Override

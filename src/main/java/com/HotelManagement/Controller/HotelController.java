@@ -15,9 +15,9 @@ import java.util.Optional;
 public class HotelController {
     @Autowired
     private HotelService hotelService;
-    @GetMapping("getAllHotels")
-    public ResponseEntity<List<Hotel>> getAllRooms(){
-        List<Hotel> hotelList = hotelService.getAllHotels();
+    @GetMapping("/getAllHotels")
+    public ResponseEntity<List<HotelDTO>> getAllRooms(){
+        List<HotelDTO> hotelList = hotelService.getAllHotels();
         return ResponseEntity.ok(hotelList);
     }
     @PostMapping("/addHotel")

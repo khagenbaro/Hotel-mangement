@@ -9,7 +9,7 @@ import java.util.Optional;
 
 @Service
 public interface HotelService {
-    List<Hotel> getAllHotels();
+    List<HotelDTO> getAllHotels();
     Optional<Hotel> getHotelById(long id);
     String addHotel(HotelDTO hotelDto);
     String deleteHotel(long id);

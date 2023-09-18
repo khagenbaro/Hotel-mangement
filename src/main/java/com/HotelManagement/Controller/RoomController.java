@@ -28,8 +28,6 @@ public class RoomController {
         Optional<Room> room = roomService.getRoomById(id);
         return  ResponseEntity.ok(room);
     }
-    /*
-    * Controller to add room*/
     @PostMapping("/addRoom")
     public ResponseEntity<String> addRoom(@RequestBody RoomDTO roomDTO) {
             String result = roomService.addRooms(roomDTO);
