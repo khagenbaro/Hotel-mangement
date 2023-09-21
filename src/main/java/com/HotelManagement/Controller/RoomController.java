@@ -39,7 +39,7 @@ public class RoomController {
         return ResponseEntity.ok(result);
     }
     @PutMapping("/updateRoom")
-    public ResponseEntity<String> updateRoom(@RequestBody long id, @RequestBody RoomDTO roomDTO){
+    public ResponseEntity<String> updateRoom(@RequestParam long id, @RequestBody RoomDTO roomDTO){
         String result = roomService.updateRoom(id , roomDTO);
         return  ResponseEntity.ok(result);
     }

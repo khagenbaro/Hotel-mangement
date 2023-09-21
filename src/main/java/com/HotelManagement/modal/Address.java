@@ -10,7 +10,8 @@ import org.springframework.data.repository.cdi.Eager;
 public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private long Id;
+
     @Column(nullable = false)
     private String streetAddress;
 

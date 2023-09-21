@@ -3,6 +3,7 @@ package com.HotelManagement.services.impl;
 import com.HotelManagement.dto.HotelDTO;
 import com.HotelManagement.mapper.HotelMapper;
 import com.HotelManagement.modal.Hotel;
+import com.HotelManagement.modal.Room;
 import com.HotelManagement.repository.HotelRepository;
 import com.HotelManagement.services.HotelService;
 import lombok.AllArgsConstructor;
@@ -49,8 +50,20 @@ public class HotelServiceImpl implements HotelService {
 
     @Override
     public String addHotel(HotelDTO hotelDto) {
+        /*Todo
+        *  Need to add a logic to check if the room number is already exists
+        *  if exists throw some exception or message
+        * */
         try{
             Hotel hotel = hotelMapper.dtoToEntity(hotelDto);
+            List<Hotel> hotelList =  hotelRepository.findAll();
+//            for(Hotel hot:hotelList){
+//                if(hot.getHotelName().equals(hotel.getHotelName())){
+//                    for(Room room:hot.getRooms()){
+//                        if(room.getRoomNumber()==hotel.getRooms().)
+//                    }
+//                }
+//            }
             hotelRepository.save(hotel);
             return "Hotel added Successfully !!";
         }

@@ -94,21 +94,28 @@ public class RoomServiceImpl implements RoomService {
     public String updateRoom(long id, RoomDTO roomDTO) {
         try{
             Optional<Room> room = roomRepository.findById(id);
-            Room roomObj = roomMapper.dtoToEntity(roomDTO);
-            roomObj.setRoomNumber(roomDTO.getRoomNumber());
-            roomObj.setRoomType(roomDTO.getRoomType());
-            roomObj.setPrice(roomDTO.getPrice());
-            //logic to check whether hotel exists
-            List<Hotel> hotelList = hotelRepository.findAll();
-            boolean containsHotel = hotelList.stream().anyMatch(
-                    hotel -> hotel.getHotelName().equals(roomDTO.getHotelName()));
-            if(containsHotel){
-                roomRepository.save(roomObj);
-                return "Room updated Successfully !!";
+            if(!room.isEmpty()){
+                Room roomObj = room.get();
+                roomObj.setRoomNumber(roomDTO.getRoomNumber());
+                roomObj.setRoomType(roomDTO.getRoomType());
+                roomObj.setPrice(roomDTO.getPrice());
+                //logic to check whether hotel exists
+                List<Hotel> hotelList = hotelRepository.findAll();
+                boolean containsHotel = hotelList.stream().anyMatch(
+                        hotel -> hotel.getHotelName().equals(roomDTO.getHotelName()));
+                if(containsHotel){
+                    roomRepository.save(roomObj);
+                    return "Room updated Successfully !!";
+                }
+                else{
+                    return "Hotel does not exists !!";
+                }
+
             }
             else{
-                return "Hotel does not exists ! Room can not be updated";
-            }        }
+                return "Id is not Valid !! Room can not be updated";
+            }
+        }
         catch (Exception e){
             throw  new RuntimeException(e.getMessage());
         }

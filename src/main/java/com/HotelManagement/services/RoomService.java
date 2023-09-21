@@ -9,7 +9,6 @@ import java.util.Optional;
 
 
 @Service
-
 public interface RoomService {
      String addRooms(RoomDTO roomDto);
 

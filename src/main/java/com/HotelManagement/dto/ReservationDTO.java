@@ -11,9 +11,9 @@ public class ReservationDTO {
 
     private Long id;
 
-    private Hotel hotel;
+    private HotelDTO hotel;
 
-    private Room room;
+    private RoomDTO room;
 
     private LocalDate checkInDate;
 
