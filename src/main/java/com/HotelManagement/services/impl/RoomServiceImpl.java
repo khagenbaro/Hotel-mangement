@@ -33,7 +33,6 @@ public class RoomServiceImpl implements RoomService {
         this.roomRepository = roomRepository;
     }
     @Override
-
     public String addRooms(RoomDTO roomDTO) {
         try{
             Room room = roomMapper.dtoToEntity(roomDTO);
@@ -41,6 +40,9 @@ public class RoomServiceImpl implements RoomService {
             boolean containsHotel = hotelList.stream().anyMatch(
                     hotel -> hotel.getHotelName().equals(room.getHotelName()));
             if(containsHotel){
+                /* Add this room to the hotel repository */
+                Hotel hotel = hotelRepository.findByHotelName(room.getHotelName());
+                hotel.getRooms().add(room);
                 roomRepository.save(room);
                 return "Room added Successfully !!";
             }

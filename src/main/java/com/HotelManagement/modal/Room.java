@@ -13,12 +13,16 @@ public class Room {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long roomId ;
 
+    @Column(nullable = false)
     private int roomNumber;
 
+    @Column(nullable = false)
     private double price;
 
+    @Column(nullable = false)
     private String hotelName;
 
+    @Column(nullable = false)
     private RoomType roomType;
 
 }

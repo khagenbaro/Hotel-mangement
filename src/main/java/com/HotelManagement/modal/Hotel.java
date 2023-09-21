@@ -18,14 +18,17 @@ public class Hotel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long hotelId;
 
+    @Column(nullable = false)
     private String hotelName;
 
+    @Column(nullable = false)
     private String city;
 
+    @Column(nullable = false)
     private String state;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id", nullable = false)
+    @JoinColumn(name = "addressId", nullable = false)
     private Address address;
 
     @OneToMany( cascade = CascadeType.ALL)
