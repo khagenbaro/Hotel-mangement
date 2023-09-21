@@ -35,6 +35,5 @@ public class ReservationController {
     public ResponseEntity<String> deleteReservation(@RequestParam long id){
         String result = reservationService.deleteReservationById(id);
         return  ResponseEntity.ok(result);
-
     }
 }
