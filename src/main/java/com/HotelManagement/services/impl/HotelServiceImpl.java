@@ -5,7 +5,9 @@ import com.HotelManagement.mapper.HotelMapper;
 import com.HotelManagement.modal.Hotel;
 import com.HotelManagement.modal.Room;
 import com.HotelManagement.repository.HotelRepository;
+import com.HotelManagement.repository.RoomRepository;
 import com.HotelManagement.services.HotelService;
+import com.HotelManagement.services.RoomService;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,9 +23,13 @@ import java.util.Optional;
 public class HotelServiceImpl implements HotelService {
     @Autowired
     private HotelRepository hotelRepository;
-
+    @Autowired
+    private RoomService roomService;
     @Autowired
     private HotelMapper hotelMapper;
+    @Autowired
+    private RoomRepository roomRepository;
+
     @Override
     public List<HotelDTO> getAllHotels() {
         List<HotelDTO> hotelDTOList = new ArrayList<>();
@@ -75,8 +81,14 @@ public class HotelServiceImpl implements HotelService {
     @Override
     public String deleteHotel(long id) {
         try{
-            Optional<Hotel> hotel = hotelRepository.findById(id);
-            if(!hotel.isEmpty()){
+            Hotel hotel = hotelRepository.findById(id).get();
+            if(hotel!=null){
+                /*find all the rooms and delete and delete each room from the repo
+                * as well as delete the hotel*/
+               List<Room> roomList = roomService.getRoomsListByHotelName(hotel.getHotelName());
+               for(Room room :roomList){
+                   roomRepository.delete(room);
+               }
                 hotelRepository.deleteById(id);
                 return "Hotel has been deleted Successfully ";
             }

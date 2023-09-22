@@ -30,7 +30,7 @@ public class HotelController {
         Optional<Hotel> hotel = hotelService.getHotelById(id);
         return  ResponseEntity.ok(hotel);
     }
-    @DeleteMapping("/deleteHotel")
+    @DeleteMapping("/deleteHotelById")
     public ResponseEntity<String> deleteHotelById(@RequestParam long id){
         String result = hotelService.deleteHotel(id);
         return ResponseEntity.ok(result);

@@ -76,6 +76,12 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
+    public List<Room> getRoomsListByHotelName(String hotelName) {
+        List<Room> rooms =roomRepository.findByHotelName(hotelName);
+        return rooms;
+    }
+
+    @Override
     public String deleteRoomById(long id) {
         try{
             Optional<Room> optionalRoom = roomRepository.findById(id);

@@ -15,6 +15,9 @@ public interface RoomService {
      List<Room> getAllRooms();
 
      Optional<Room> getRoomById(long id);
+
+     List<Room> getRoomsListByHotelName(String hotelName);
+
      String deleteRoomById(long id);
 
      String updateRoom(long id, RoomDTO roomDTO);
