@@ -78,8 +78,13 @@ public class RoomServiceImpl implements RoomService {
     @Override
     public String deleteRoomById(long id) {
         try{
-            Optional<Room> room = roomRepository.findById(id);
-            if(!room.isEmpty()){
+            Optional<Room> optionalRoom = roomRepository.findById(id);
+            // convert optional room to type Room
+            Room room = optionalRoom.orElse(new Room());
+            if(!optionalRoom.isEmpty()){
+                // logic to delete the room from the hotel repo as well as from the room repo
+                Hotel hotel = hotelRepository.findByHotelName(optionalRoom.get().getHotelName());
+                hotel.getRooms().remove(room);
                 roomRepository.deleteById(id);
                 return "Room has been deleted Successfully";
             }
@@ -102,11 +107,13 @@ public class RoomServiceImpl implements RoomService {
                 roomObj.setRoomType(roomDTO.getRoomType());
                 roomObj.setPrice(roomDTO.getPrice());
                 //logic to check whether hotel exists
+                // todo update the room of the hotel
                 List<Hotel> hotelList = hotelRepository.findAll();
-                boolean containsHotel = hotelList.stream().anyMatch(
-                        hotel -> hotel.getHotelName().equals(roomDTO.getHotelName()));
-                if(containsHotel){
+                Hotel hotelOptional = hotelRepository.findByHotelName(roomDTO.getHotelName());
+                if(hotelOptional!=null){
+                    roomObj.setHotelName(hotelOptional.getHotelName());
                     roomRepository.save(roomObj);
+                    hotelRepository.save(hotelOptional);
                     return "Room updated Successfully !!";
                 }
                 else{
