@@ -2,6 +2,7 @@ package com.HotelManagement.services;
 
 import com.HotelManagement.dto.HotelDTO;
 import com.HotelManagement.modal.Hotel;
+import com.HotelManagement.modal.Room;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

@@ -77,7 +77,7 @@ public class RoomServiceImpl implements RoomService {
 
     @Override
     public List<Room> getRoomsListByHotelName(String hotelName) {
-        List<Room> rooms =roomRepository.findByHotelName(hotelName);
+        List<Room> rooms =roomRepository.findAllByHotelName(hotelName);
         return rooms;
     }
 

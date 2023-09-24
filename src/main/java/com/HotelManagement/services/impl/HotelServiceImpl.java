@@ -1,7 +1,9 @@
 package com.HotelManagement.services.impl;
 
 import com.HotelManagement.dto.HotelDTO;
+import com.HotelManagement.dto.RoomDTO;
 import com.HotelManagement.mapper.HotelMapper;
+import com.HotelManagement.mapper.RoomMapper;
 import com.HotelManagement.modal.Hotel;
 import com.HotelManagement.modal.Room;
 import com.HotelManagement.repository.HotelRepository;
@@ -30,6 +32,8 @@ public class HotelServiceImpl implements HotelService {
     @Autowired
     private RoomRepository roomRepository;
 
+    @Autowired
+    private RoomMapper roomMapper;
     @Override
     public List<HotelDTO> getAllHotels() {
         List<HotelDTO> hotelDTOList = new ArrayList<>();
@@ -56,21 +60,38 @@ public class HotelServiceImpl implements HotelService {
 
     @Override
     public String addHotel(HotelDTO hotelDto) {
-        /*Todo
-        *  Need to add a logic to check if the room number is already exists
-        *  if exists throw some exception or message
-        * */
         try{
-            Hotel hotel = hotelMapper.dtoToEntity(hotelDto);
+            Hotel hotel = hotelRepository.findByHotelName(hotelDto.getHotelName());
             List<Hotel> hotelList =  hotelRepository.findAll();
-//            for(Hotel hot:hotelList){
-//                if(hot.getHotelName().equals(hotel.getHotelName())){
-//                    for(Room room:hot.getRooms()){
-//                        if(room.getRoomNumber()==hotel.getRooms().)
-//                    }
-//                }
-//            }
-            hotelRepository.save(hotel);
+            String hotelName = hotelDto.getHotelName();
+            boolean  containsHotel = false;
+            if(hotel!=null){
+                containsHotel= true;
+            }
+            if(containsHotel){
+                // fetch all the rooms for the hotel
+                // add room number to the hotel if it does not exist
+                List<Room> roomList  = hotel.getRooms();
+                List<Room>rooms = roomService.getRoomsListByHotelName(hotel.getHotelName());
+                List<Integer> roomNumberList = new ArrayList<>();
+                for(Room room:roomList){
+                    roomNumberList.add(room.getRoomNumber());
+                }
+                for (Room room : hotel.getRooms()) {
+                    // check if room number  already exist if not add the room to the hotel
+                    if (!roomNumberList.contains(room.getRoomNumber())) {
+                            hotel.getRooms().add(room);
+                        }
+                    // else return room already exists.
+                    else{
+                            return "Room Number Already Exists !";
+                        }
+                }
+            }
+            else{
+                hotelRepository.save(hotel);
+            }
+
             return "Hotel added Successfully !!";
         }
         catch (Exception e){
