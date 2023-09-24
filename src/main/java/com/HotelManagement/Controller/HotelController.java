@@ -26,8 +26,8 @@ public class HotelController {
         return  ResponseEntity.ok(result);
     }
     @GetMapping("/getHotelById")
-    public ResponseEntity<Optional<Hotel>> getHotelById(@RequestParam  long id){
-        Optional<Hotel> hotel = hotelService.getHotelById(id);
+    public ResponseEntity<HotelDTO> getHotelById(@RequestParam  long id){
+        HotelDTO hotel = hotelService.getHotelById(id);
         return  ResponseEntity.ok(hotel);
     }
     @DeleteMapping("/deleteHotelById")

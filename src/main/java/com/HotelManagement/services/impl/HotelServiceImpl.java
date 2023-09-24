@@ -48,10 +48,10 @@ public class HotelServiceImpl implements HotelService {
     }
 
     @Override
-    public Optional<Hotel> getHotelById(long id) {
+    public HotelDTO getHotelById(long id) {
        try{
            Optional<Hotel> hotel = hotelRepository.findById(id);
-           return hotel;
+           return hotelMapper.entityToDTO(hotel.get());
        }
        catch (Exception ex){
            throw new RuntimeException(ex.getMessage());
