@@ -14,7 +14,7 @@ public interface RoomService {
 
      List<Room> getAllRooms();
 
-     Optional<Room> getRoomById(long id);
+     RoomDTO getRoomById(long id);
 
      List<Room> getRoomsListByHotelName(String hotelName);
 

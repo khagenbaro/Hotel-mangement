@@ -24,9 +24,9 @@ public class RoomController {
         return ResponseEntity.ok(rooms);
     }
     @GetMapping("/getRoomById")
-    public ResponseEntity<Optional<Room>> getRoomById(@RequestParam long id){
-        Optional<Room> room = roomService.getRoomById(id);
-        return  ResponseEntity.ok(room);
+    public ResponseEntity<RoomDTO> getRoomById(@RequestParam long id){
+        RoomDTO roomDTO = roomService.getRoomById(id);
+        return  ResponseEntity.ok(roomDTO);
     }
     @PostMapping("/addRoom")
     public ResponseEntity<String> addRoom(@RequestBody RoomDTO roomDTO) {

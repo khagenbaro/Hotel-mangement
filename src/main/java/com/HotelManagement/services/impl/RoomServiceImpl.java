@@ -42,7 +42,9 @@ public class RoomServiceImpl implements RoomService {
             if(containsHotel){
                 /* Add this room to the hotel repository */
                 Hotel hotel = hotelRepository.findByHotelName(room.getHotelName());
+                // add the room to the hotel repo
                 hotel.getRooms().add(room);
+                // add the room to the room repo
                 roomRepository.save(room);
                 return "Room added Successfully !!";
             }
@@ -60,11 +62,12 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
-    public Optional<Room> getRoomById(long id) {
+    public RoomDTO getRoomById(long id) {
         try{
             Optional<Room> room = roomRepository.findById(id);
-            if(!room.isEmpty()){
-                return room;
+            if(room.isPresent()){
+                // map dto to room dto and return
+                return roomMapper.entityToDTO(room.get());
             }
             else{
                 throw  new RuntimeException("Not valid id");
@@ -87,10 +90,12 @@ public class RoomServiceImpl implements RoomService {
             Optional<Room> optionalRoom = roomRepository.findById(id);
             // convert optional room to type Room
             Room room = optionalRoom.orElse(new Room());
-            if(!optionalRoom.isEmpty()){
+            if(optionalRoom.isPresent()){
                 // logic to delete the room from the hotel repo as well as from the room repo
                 Hotel hotel = hotelRepository.findByHotelName(optionalRoom.get().getHotelName());
+                // remove from hotel repo
                 hotel.getRooms().remove(room);
+                //remove from the room repo
                 roomRepository.deleteById(id);
                 return "Room has been deleted Successfully";
             }
@@ -107,7 +112,7 @@ public class RoomServiceImpl implements RoomService {
     public String updateRoom(long id, RoomDTO roomDTO) {
         try{
             Optional<Room> room = roomRepository.findById(id);
-            if(!room.isEmpty()){
+            if(room.isPresent()){
                 Room roomObj = room.get();
                 roomObj.setRoomNumber(roomDTO.getRoomNumber());
                 roomObj.setRoomType(roomDTO.getRoomType());
@@ -118,7 +123,9 @@ public class RoomServiceImpl implements RoomService {
                 Hotel hotelOptional = hotelRepository.findByHotelName(roomDTO.getHotelName());
                 if(hotelOptional!=null){
                     roomObj.setHotelName(hotelOptional.getHotelName());
+                    // update the room in the hotel repo
                     roomRepository.save(roomObj);
+                    // update the room in the room repo
                     hotelRepository.save(hotelOptional);
                     return "Room updated Successfully !!";
                 }
