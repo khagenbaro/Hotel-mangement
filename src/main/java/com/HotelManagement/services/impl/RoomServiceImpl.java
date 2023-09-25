@@ -57,8 +57,13 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
-    public List<Room> getAllRooms() {
-        return roomRepository.findAll();
+    public List<RoomDTO> getAllRooms() {
+        List<Room> rooms = roomRepository.findAll();
+        List<RoomDTO> roomDTOList =  null;
+        for(Room room: rooms){
+            roomDTOList.add(roomMapper.entityToDTO(room));
+        }
+        return roomDTOList;
     }
 
     @Override

@@ -12,7 +12,7 @@ import java.util.Optional;
 public interface RoomService {
      String addRooms(RoomDTO roomDto);
 
-     List<Room> getAllRooms();
+     List<RoomDTO> getAllRooms();
 
      RoomDTO getRoomById(long id);
 

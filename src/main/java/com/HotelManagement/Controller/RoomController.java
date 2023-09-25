@@ -19,8 +19,8 @@ public class RoomController {
     private RoomService roomService;
 
     @GetMapping("/getAllRooms")
-    public ResponseEntity<List<Room>> getRooms(){
-        List<Room> rooms = roomService.getAllRooms();
+    public ResponseEntity<List<RoomDTO>> getRooms(){
+        List<RoomDTO> rooms = roomService.getAllRooms();
         return ResponseEntity.ok(rooms);
     }
     @GetMapping("/getRoomById")
