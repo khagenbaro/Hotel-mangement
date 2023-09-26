@@ -1,7 +1,5 @@
 package com.HotelManagement.dto;
 
-import com.HotelManagement.modal.Hotel;
-import com.HotelManagement.modal.Room;
 import lombok.Data;
 
 import java.time.LocalDate;
