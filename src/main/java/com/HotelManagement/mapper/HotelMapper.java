@@ -53,6 +53,7 @@ public class HotelMapper {
                     roomObj.setPrice(room.getPrice());
                     roomObj.setRoomType(room.getRoomType());
                     roomObj.setHotelName(room.getHotelName());
+                    roomObj.setAvailable(room.isAvailable());
                     return roomObj;
                 })
                 .collect(Collectors.toList());
