@@ -14,6 +14,7 @@ public class RoomMapper {
         roomDTO.setHotelName(room.getHotelName());
         roomDTO.setRoomType(room.getRoomType());
         roomDTO.setPrice(room.getPrice());
+        roomDTO.setAvailable(room.isAvailable());
         return roomDTO;
     }
     public  Room dtoToEntity(RoomDTO roomDto){
@@ -22,6 +23,7 @@ public class RoomMapper {
         room.setHotelName(roomDto.getHotelName());
         room.setRoomType(roomDto.getRoomType());
         room.setPrice(roomDto.getPrice());
+        room.setAvailable(roomDto.isAvailable());
         return room;
     }
 }

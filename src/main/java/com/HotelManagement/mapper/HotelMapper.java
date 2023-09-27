@@ -40,6 +40,7 @@ public class HotelMapper {
                     roomDTO.setPrice(room.getPrice());
                     roomDTO.setRoomType(room.getRoomType());
                     roomDTO.setHotelName(room.getHotelName());
+                    roomDTO.setAvailable(room.isAvailable());
                     return roomDTO;
                 })
                 .collect(Collectors.toList());
