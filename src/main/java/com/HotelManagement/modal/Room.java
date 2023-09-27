@@ -25,4 +25,7 @@ public class Room {
     @Column(nullable = false)
     private RoomType roomType;
 
+    @Column(nullable = false)
+    private boolean isAvailable;
+
 }

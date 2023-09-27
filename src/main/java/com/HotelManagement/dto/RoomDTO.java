@@ -12,4 +12,6 @@ public class RoomDTO {
     private String hotelName;
 
     private RoomType roomType;
+
+    private  boolean isAvailable;
 }

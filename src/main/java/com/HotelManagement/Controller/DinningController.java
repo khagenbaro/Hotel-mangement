@@ -14,6 +14,7 @@ public class DinningController {
             Catering for events and conferences.*/
     public ResponseEntity<String> addBreakfast(){
 
+        return ResponseEntity.ok("added");
     }
 
 }
