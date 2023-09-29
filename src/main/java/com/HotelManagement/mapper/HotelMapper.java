@@ -4,9 +4,6 @@ import com.HotelManagement.dto.HotelDTO;
 import com.HotelManagement.dto.RoomDTO;
 import com.HotelManagement.modal.Hotel;
 import com.HotelManagement.modal.Room;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.factory.Mappers;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -40,7 +37,6 @@ public class HotelMapper {
                     roomDTO.setPrice(room.getPrice());
                     roomDTO.setRoomType(room.getRoomType());
                     roomDTO.setHotelName(room.getHotelName());
-                    roomDTO.setAvailable(room.isAvailable());
                     return roomDTO;
                 })
                 .collect(Collectors.toList());
@@ -53,7 +49,6 @@ public class HotelMapper {
                     roomObj.setPrice(room.getPrice());
                     roomObj.setRoomType(room.getRoomType());
                     roomObj.setHotelName(room.getHotelName());
-                    roomObj.setAvailable(room.isAvailable());
                     return roomObj;
                 })
                 .collect(Collectors.toList());

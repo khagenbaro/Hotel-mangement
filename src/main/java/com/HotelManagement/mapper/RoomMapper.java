@@ -2,19 +2,17 @@ package com.HotelManagement.mapper;
 
 import com.HotelManagement.dto.RoomDTO;
 import com.HotelManagement.modal.Room;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
 public class RoomMapper {
+
     public RoomDTO entityToDTO(Room room){
         RoomDTO roomDTO = new RoomDTO();
         roomDTO.setRoomNumber(room.getRoomNumber());
         roomDTO.setHotelName(room.getHotelName());
         roomDTO.setRoomType(room.getRoomType());
         roomDTO.setPrice(room.getPrice());
-        roomDTO.setAvailable(room.isAvailable());
         return roomDTO;
     }
     public  Room dtoToEntity(RoomDTO roomDto){
@@ -23,7 +21,6 @@ public class RoomMapper {
         room.setHotelName(roomDto.getHotelName());
         room.setRoomType(roomDto.getRoomType());
         room.setPrice(roomDto.getPrice());
-        room.setAvailable(roomDto.isAvailable());
         return room;
     }
 }

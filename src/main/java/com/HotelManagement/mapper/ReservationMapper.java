@@ -2,7 +2,6 @@ package com.HotelManagement.mapper;
 
 import com.HotelManagement.dto.ReservationDTO;
 import com.HotelManagement.modal.Reservation;
-import com.HotelManagement.modal.Room;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class ReservationMapper {
@@ -17,7 +16,6 @@ public class ReservationMapper {
         reservationDTO.setCheckInDate(reservation.getCheckInDate());
         reservationDTO.setCheckOutDate(reservation.getCheckOutDate());
         reservationDTO.setTotalPrice(reservation.getTotalPrice());
-
         return reservationDTO;
     }
     public Reservation dtoToEntity(ReservationDTO reservationDto){

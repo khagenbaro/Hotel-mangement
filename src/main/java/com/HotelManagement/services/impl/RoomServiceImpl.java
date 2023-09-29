@@ -122,7 +122,6 @@ public class RoomServiceImpl implements RoomService {
                 roomObj.setRoomNumber(roomDTO.getRoomNumber());
                 roomObj.setRoomType(roomDTO.getRoomType());
                 roomObj.setPrice(roomDTO.getPrice());
-                roomObj.setAvailable(roomDTO.isAvailable());
                 //logic to check whether hotel exists
                 // todo update the room of the hotel
                 List<Hotel> hotelList = hotelRepository.findAll();
