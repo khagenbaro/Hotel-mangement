@@ -21,6 +21,7 @@ public class BreakfastMenu {
     private String  categoryName;
 
     @OneToMany(mappedBy = "breakfastMenu",cascade = CascadeType.ALL)
+    @Column(nullable = true)
     private List<MenuItem> menuItems;
 
 }
