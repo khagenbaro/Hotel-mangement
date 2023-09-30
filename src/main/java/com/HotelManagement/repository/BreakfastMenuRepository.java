@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface BreakfastMenuRepository extends JpaRepository<BreakfastMenu,Long> {
+    BreakfastMenu findByCategoryName(String categoryName);
 }

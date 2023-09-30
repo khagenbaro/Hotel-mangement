@@ -20,7 +20,7 @@ public class BreakfastMenu {
     @Column(unique = true)
     private String  categoryName;
 
-    @OneToMany(mappedBy = "breakfastMenu", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "breakfastMenu",cascade = CascadeType.ALL)
     private List<MenuItem> menuItems;
 
 }

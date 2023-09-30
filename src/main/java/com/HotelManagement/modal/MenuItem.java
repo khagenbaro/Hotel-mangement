@@ -21,5 +21,9 @@ public class MenuItem {
 
     private String description ;
 
+    @ManyToOne()
+    @JoinColumn(name="breakfastCategory_id")
+    private BreakfastMenu breakfastMenu;
+
 
 }
