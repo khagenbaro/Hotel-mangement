@@ -3,16 +3,12 @@ package com.HotelManagement.Controller;
 import com.HotelManagement.modal.MenuItem;
 import com.HotelManagement.services.MenuService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.swing.text.html.parser.Entity;
-import java.util.List;
-
 @RestController
 @RequestMapping("/breakfast_menu")
-public class MenuController {
+public class BreakfastController {
 
     @Autowired
     private MenuService menuService;

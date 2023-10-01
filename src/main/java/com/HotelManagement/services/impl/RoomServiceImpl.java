@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,24 +35,38 @@ public class RoomServiceImpl implements RoomService {
     }
     @Override
     public String addRooms(RoomDTO roomDTO) {
-        try{
+        try {
             Room room = roomMapper.dtoToEntity(roomDTO);
-            List<Hotel> hotelList=  hotelRepository.findAll();
+            List<Hotel> hotelList = hotelRepository.findAll();
             boolean containsHotel = hotelList.stream().anyMatch(
                     hotel -> hotel.getHotelName().equals(room.getHotelName()));
-            if(containsHotel){
+            if (containsHotel) {
                 /* Add this room to the hotel repository */
                 Hotel hotel = hotelRepository.findByHotelName(room.getHotelName());
-                // add the room to the hotel repo
-                hotel.getRooms().add(room);
-                // add the room to the room repo
-                roomRepository.save(room);
-                return "Room added Successfully !!";
+                // check if that hotel contains that room already
+                List<Room> hotelRoomsList = hotel.getRooms();
+                // check room number present in the hotel
+                boolean roomNumberExist = false;
+                for (Room hotelRoom : hotelRoomsList) {
+                    if (hotelRoom.getRoomNumber() == roomDTO.getRoomNumber()) {
+                        roomNumberExist = true;
+                    }
+                }
+                // if room not present then add in the hotel repo
+                if (!roomNumberExist) {
+                    // add the room to the hotel repo
+                    // add the room to the room repo
+                    hotel.getRooms().add(roomMapper.dtoToEntity(roomDTO));
+                    roomRepository.save(room);
+                    return "Room added Successfully !!";
+                } else {
+                    return "Room Number already exists";
+                }
             }
-            else{
+            else {
                 return "Hotel does not exists";
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new RuntimeException(e.getMessage());
         }
     }
@@ -59,7 +74,7 @@ public class RoomServiceImpl implements RoomService {
     @Override
     public List<RoomDTO> getAllRooms() {
         List<Room> rooms = roomRepository.findAll();
-        List<RoomDTO> roomDTOList =  null;
+        List<RoomDTO> roomDTOList =  new ArrayList<>();
         for(Room room: rooms){
             roomDTOList.add(roomMapper.entityToDTO(room));
         }
