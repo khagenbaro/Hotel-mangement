@@ -1,5 +1,6 @@
 package com.HotelManagement.modal;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,6 +24,7 @@ public class MenuItem {
 
     @ManyToOne()
     @JoinColumn(name="breakfastCategory_id")
+    @JsonBackReference
     private BreakfastMenu breakfastMenu;
 
 

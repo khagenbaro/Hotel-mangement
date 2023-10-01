@@ -4,16 +4,17 @@ import com.HotelManagement.modal.BreakfastMenu;
 import com.HotelManagement.modal.MenuItem;
 import com.HotelManagement.repository.BreakfastMenuRepository;
 import com.HotelManagement.repository.MenuRepository;
-import com.HotelManagement.services.MenuService;
+import com.HotelManagement.services.BreakfastMenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
-public class MenuServiceImpl implements MenuService {
+public class BreakfastMenuServiceImpl implements BreakfastMenuService {
     @Autowired
     private BreakfastMenuRepository breakfastMenuRepository;
     @Autowired
@@ -49,6 +50,34 @@ public class MenuServiceImpl implements MenuService {
         }
         catch (Exception e){
             throw  new RuntimeException(e.getMessage());
+        }
+    }
+
+    @Override
+    public String deleteBreakfastMenu(long id) {
+        Optional<MenuItem> menuItemOptional = menuRepository.findById(id);
+        if(menuItemOptional.isPresent()){
+            menuRepository.deleteById(id);
+            return  "Menu Item has been deleted !";
+        }
+        else {
+            return "Menu does not exist with id "+id;
+        }
+    }
+
+    @Override
+    public MenuItem updateMenuItem(long id, MenuItem menuItem) {
+        Optional<MenuItem> menuItem1 = menuRepository.findById(id);
+        if(menuItem1.isPresent()){
+            MenuItem menuItem2 = menuItem1.get();
+            menuItem2.setItemName(menuItem.getItemName());
+            menuItem2.setPrice(menuItem.getPrice());
+            menuItem2.setDescription(menuItem.getDescription());
+            menuItem2.setBreakfastMenu(menuItem1.get().getBreakfastMenu());
+            menuRepository.save(menuItem2);
+            return  menuItem2;
+        }else {
+            throw new RuntimeException("Something happened");
         }
     }
 }

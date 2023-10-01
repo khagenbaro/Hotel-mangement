@@ -102,7 +102,8 @@ public class RoomServiceImpl implements RoomService {
     @Override
     public List<Room> getRoomsListByHotelName(String hotelName) {
         List<Room> rooms =roomRepository.findAllByHotelName(hotelName);
-        return rooms;
+        // first check it's not empty
+        return rooms.isEmpty() ? null : rooms;
     }
 
     @Override
@@ -121,7 +122,7 @@ public class RoomServiceImpl implements RoomService {
                 return "Room has been deleted Successfully";
             }
             else{
-                return "Room can not be deleted";
+                return "Room does not exist with id :" + String.valueOf(id);
             }
         }
         catch (Exception e){

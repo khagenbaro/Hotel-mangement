@@ -1,5 +1,6 @@
 package com.HotelManagement.modal;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -22,6 +23,7 @@ public class BreakfastMenu {
 
     @OneToMany(mappedBy = "breakfastMenu",cascade = CascadeType.ALL)
     @Column(nullable = true)
+    @JsonBackReference
     private List<MenuItem> menuItems;
 
 }
