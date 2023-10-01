@@ -85,6 +85,7 @@ public class RoomServiceImpl implements RoomService {
     public RoomDTO getRoomById(long id) {
         try{
             Optional<Room> room = roomRepository.findById(id);
+            // check if room is present by that id
             if(room.isPresent()){
                 // map dto to room dto and return
                 return roomMapper.entityToDTO(room.get());
