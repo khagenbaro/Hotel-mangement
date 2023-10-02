@@ -80,4 +80,9 @@ public class BreakfastMenuServiceImpl implements BreakfastMenuService {
             throw new RuntimeException("Something happened");
         }
     }
+
+    @Override
+    public List<MenuItem> getAllBreakfastMenu() {
+        return menuRepository.findAll();
+    }
 }
