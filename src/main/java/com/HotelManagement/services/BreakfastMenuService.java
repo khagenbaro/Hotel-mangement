@@ -8,12 +8,12 @@ import java.util.List;
 
 @Service
 public interface BreakfastMenuService {
-    String addBreakfastMenu(String categoryName , MenuItemDTO menuItemsDto);
+    String addBreakfastMenu(MenuItemDTO menuItemsDto);
 
 //  String addBreakfastCategory(String categoryName);
     String deleteBreakfastMenu(long id);
 
     MenuItemDTO updateMenuItem(long id, MenuItemDTO menuItemDto);
 
-    List<MenuItem> getAllBreakfastMenu();
+    List<MenuItemDTO> getAllBreakfastMenu();
 }

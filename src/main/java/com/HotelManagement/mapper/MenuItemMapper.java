@@ -5,8 +5,9 @@ import com.HotelManagement.modal.BreakfastMenu;
 import com.HotelManagement.modal.MenuItem;
 import com.HotelManagement.repository.BreakfastMenuRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-
+@Component
 public class MenuItemMapper {
     @Autowired
     private BreakfastMenuRepository breakfastMenuRepository;
@@ -17,7 +18,7 @@ public class MenuItemMapper {
         menuItem.setPrice(menuItemDTO.getPrice());
         menuItem.setDescription(menuItemDTO.getDescription());
         //fetch breakfast  category and then fetch the breakfast by the category
-        BreakfastMenu breakfastMenu =breakfastMenuRepository.findByCategoryName(menuItemDTO.getBreakfastCategory());
+        BreakfastMenu breakfastMenu = breakfastMenuRepository.findByCategoryName(menuItemDTO.getBreakfastCategory());
         menuItem.setBreakfastMenu(breakfastMenu);
         return menuItem;
     }

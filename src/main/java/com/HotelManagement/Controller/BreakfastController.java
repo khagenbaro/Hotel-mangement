@@ -17,8 +17,8 @@ public class BreakfastController {
     private BreakfastMenuService breakfastMenuService;
 //    TO add new category or new menu item s
     @PostMapping(value = "/addBreakfast/ItemMenu")
-    public ResponseEntity<String> addMenuItem(@RequestParam  String categoryName, @RequestBody MenuItemDTO menuItemDTO){
-        return ResponseEntity.ok(breakfastMenuService.addBreakfastMenu(categoryName , menuItemDTO));
+    public ResponseEntity<String> addMenuItem( @RequestBody MenuItemDTO menuItemDTO){
+        return ResponseEntity.ok(breakfastMenuService.addBreakfastMenu(menuItemDTO));
     }
     @DeleteMapping("/deletemenuitem")
     public ResponseEntity<String> deleteMenuItem(@RequestParam long id){
@@ -29,7 +29,7 @@ public class BreakfastController {
         return ResponseEntity.ok(breakfastMenuService.updateMenuItem(id, menuItemDTO));
     }
     @GetMapping("/getAllBreakfastMenu")
-    public ResponseEntity<List<MenuItem>>  getAllBreakfastMenu(){
+    public ResponseEntity<List<MenuItemDTO>>  getAllBreakfastMenu(){
         return ResponseEntity.ok(breakfastMenuService.getAllBreakfastMenu());
 
     }

@@ -24,26 +24,39 @@ public class BreakfastMenuServiceImpl implements BreakfastMenuService {
     @Autowired
     private MenuItemMapper menuItemMapper;
     @Override
-    public String addBreakfastMenu(String categoryName , MenuItemDTO menuItemDTO) {
+    public String addBreakfastMenu( MenuItemDTO menuItemDTO) {
         // menu item is null then return
         if(menuItemDTO == null){
             return "Error: A breakfast category must have at least one menu item.";
         }
         try{
-            BreakfastMenu breakfastMenu =  breakfastMenuRepository.findByCategoryName(categoryName);
+            BreakfastMenu breakfastMenu =  breakfastMenuRepository.findByCategoryName(menuItemDTO.getBreakfastCategory());
             MenuItem menuItem = new MenuItem();
             // if breakfast category exists add menu item to it
             if(breakfastMenu!=null){
-                menuItem.setBreakfastMenu(breakfastMenu);
-                breakfastMenu.getMenuItems().add(menuItem);
-                breakfastMenuRepository.save(breakfastMenu);
-                return  "New Menu Added Successfully!";
+                List<MenuItem> menuItemList = breakfastMenu.getMenuItems();
+                List<String> itemNamesList = new ArrayList<>();
+                for(MenuItem item : menuItemList){
+                    itemNamesList.add(item.getItemName());
+                }
+                if(!itemNamesList.contains(menuItemDTO.getItemName())){
+                    menuItem.setItemName(menuItemDTO.getItemName());
+                    menuItem.setPrice(menuItemDTO.getPrice());
+                    menuItem.setDescription(menuItemDTO.getDescription());
+                    menuItem.setBreakfastMenu(breakfastMenu);
+                    breakfastMenu.getMenuItems().add(menuItem);
+                    breakfastMenuRepository.save(breakfastMenu);
+                    return  "New Menu Added Successfully!";
+                }
+                else{
+                    return  "Menu Item Already Exists!";
+                }
             }
             // if breakfast category does not exist first add the category
             // then add the menu item into the category
             else{
                 BreakfastMenu breakfastMenu1 = new BreakfastMenu();
-                breakfastMenu1.setCategoryName(categoryName);
+                breakfastMenu1.setCategoryName(menuItemDTO.getBreakfastCategory());
                 List<MenuItem> menuItemList = new ArrayList<>();
                 menuItem.setBreakfastMenu(breakfastMenu1);
                 menuItemList.add(menuItem);
@@ -51,7 +64,6 @@ public class BreakfastMenuServiceImpl implements BreakfastMenuService {
                 breakfastMenuRepository.save(breakfastMenu1);
                 return "New Category has been added successfully !! Menu item also been added";
             }
-
         }
         catch (Exception e){
             throw  new RuntimeException(e.getMessage());
@@ -87,7 +99,14 @@ public class BreakfastMenuServiceImpl implements BreakfastMenuService {
     }
 
     @Override
-    public List<MenuItem> getAllBreakfastMenu() {
-        return menuRepository.findAll();
+    public List<MenuItemDTO> getAllBreakfastMenu() {
+        List<MenuItemDTO>  menuItemDTOList = new ArrayList<>();
+        List<MenuItem> menuItemList = menuRepository.findAll();
+        if(!menuItemList.isEmpty()){
+            for(MenuItem item : menuItemList){
+                menuItemDTOList.add(menuItemMapper.entityToDTO(item));
+            }
+        }
+        return menuItemDTOList;
     }
 }

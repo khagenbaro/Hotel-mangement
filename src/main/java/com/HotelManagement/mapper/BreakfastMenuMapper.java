@@ -2,7 +2,9 @@ package com.HotelManagement.mapper;
 
 import com.HotelManagement.dto.BreakfastMenuDTO;
 import com.HotelManagement.modal.BreakfastMenu;
+import org.springframework.stereotype.Component;
 
+@Component
 public class BreakfastMenuMapper {
     BreakfastMenu dtoToEntity(BreakfastMenuDTO breakfastMenuDTO){
        BreakfastMenu breakfastMenu = new BreakfastMenu();
