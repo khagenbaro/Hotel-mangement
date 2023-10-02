@@ -1,5 +1,6 @@
 package com.HotelManagement.Controller;
 
+import com.HotelManagement.dto.MenuItemDTO;
 import com.HotelManagement.modal.MenuItem;
 import com.HotelManagement.services.BreakfastMenuService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,16 +17,16 @@ public class BreakfastController {
     private BreakfastMenuService breakfastMenuService;
 //    TO add new category or new menu item s
     @PostMapping(value = "/addBreakfast/ItemMenu")
-    public ResponseEntity<String> addMenuItem(@RequestParam  String categoryName, @RequestBody MenuItem menuItem){
-        return ResponseEntity.ok(breakfastMenuService.addBreakfastMenu(categoryName , menuItem));
+    public ResponseEntity<String> addMenuItem(@RequestParam  String categoryName, @RequestBody MenuItemDTO menuItemDTO){
+        return ResponseEntity.ok(breakfastMenuService.addBreakfastMenu(categoryName , menuItemDTO));
     }
     @DeleteMapping("/deletemenuitem")
     public ResponseEntity<String> deleteMenuItem(@RequestParam long id){
         return ResponseEntity.ok(breakfastMenuService.deleteBreakfastMenu(id));
     }
     @PutMapping("/updatemenuitem")
-    public ResponseEntity<MenuItem> updateMenuItem(@RequestParam long id , @RequestBody MenuItem menuItem){
-        return ResponseEntity.ok(breakfastMenuService.updateMenuItem(id, menuItem));
+    public ResponseEntity<MenuItemDTO> updateMenuItem(@RequestParam long id , @RequestBody MenuItemDTO menuItemDTO){
+        return ResponseEntity.ok(breakfastMenuService.updateMenuItem(id, menuItemDTO));
     }
     @GetMapping("/getAllBreakfastMenu")
     public ResponseEntity<List<MenuItem>>  getAllBreakfastMenu(){

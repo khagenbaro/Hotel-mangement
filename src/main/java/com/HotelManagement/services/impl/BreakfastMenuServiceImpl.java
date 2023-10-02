@@ -1,5 +1,7 @@
 package com.HotelManagement.services.impl;
 
+import com.HotelManagement.dto.MenuItemDTO;
+import com.HotelManagement.mapper.MenuItemMapper;
 import com.HotelManagement.modal.BreakfastMenu;
 import com.HotelManagement.modal.MenuItem;
 import com.HotelManagement.repository.BreakfastMenuRepository;
@@ -19,14 +21,17 @@ public class BreakfastMenuServiceImpl implements BreakfastMenuService {
     private BreakfastMenuRepository breakfastMenuRepository;
     @Autowired
     private MenuRepository menuRepository;
+    @Autowired
+    private MenuItemMapper menuItemMapper;
     @Override
-    public String addBreakfastMenu(String categoryName ,MenuItem menuItem) {
+    public String addBreakfastMenu(String categoryName , MenuItemDTO menuItemDTO) {
         // menu item is null then return
-        if(menuItem== null){
+        if(menuItemDTO == null){
             return "Error: A breakfast category must have at least one menu item.";
         }
         try{
             BreakfastMenu breakfastMenu =  breakfastMenuRepository.findByCategoryName(categoryName);
+            MenuItem menuItem = new MenuItem();
             // if breakfast category exists add menu item to it
             if(breakfastMenu!=null){
                 menuItem.setBreakfastMenu(breakfastMenu);
@@ -66,16 +71,16 @@ public class BreakfastMenuServiceImpl implements BreakfastMenuService {
     }
 
     @Override
-    public MenuItem updateMenuItem(long id, MenuItem menuItem) {
-        Optional<MenuItem> menuItem1 = menuRepository.findById(id);
-        if(menuItem1.isPresent()){
-            MenuItem menuItem2 = menuItem1.get();
-            menuItem2.setItemName(menuItem.getItemName());
-            menuItem2.setPrice(menuItem.getPrice());
-            menuItem2.setDescription(menuItem.getDescription());
-            menuItem2.setBreakfastMenu(menuItem1.get().getBreakfastMenu());
+    public MenuItemDTO updateMenuItem(long id, MenuItemDTO menuItemDTO) {
+        Optional<MenuItem> menuItem = menuRepository.findById(id);
+        if(menuItem.isPresent()){
+            MenuItem menuItem2 = menuItem.get();
+            menuItem2.setItemName(menuItemDTO.getItemName());
+            menuItem2.setPrice(menuItemDTO.getPrice());
+            menuItem2.setDescription(menuItemDTO.getDescription());
+            menuItem2.setBreakfastMenu(menuItem.get().getBreakfastMenu());
             menuRepository.save(menuItem2);
-            return  menuItem2;
+            return menuItemMapper.entityToDTO(menuItem2);
         }else {
             throw new RuntimeException("Something happened");
         }
