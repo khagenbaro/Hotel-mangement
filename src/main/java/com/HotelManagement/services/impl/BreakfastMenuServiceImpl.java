@@ -34,16 +34,22 @@ public class BreakfastMenuServiceImpl implements BreakfastMenuService {
             MenuItem menuItem = new MenuItem();
             // if breakfast category exists add menu item to it
             if(breakfastMenu!=null){
+                // list of menu item of that category
                 List<MenuItem> menuItemList = breakfastMenu.getMenuItems();
                 List<String> itemNamesList = new ArrayList<>();
+                //list of menu item name of the category
                 for(MenuItem item : menuItemList){
                     itemNamesList.add(item.getItemName());
                 }
+                // check if the menu item already exists
+                // if not then add the menu item
                 if(!itemNamesList.contains(menuItemDTO.getItemName())){
+                    // set the menu item properties
                     menuItem.setItemName(menuItemDTO.getItemName());
                     menuItem.setPrice(menuItemDTO.getPrice());
                     menuItem.setDescription(menuItemDTO.getDescription());
                     menuItem.setBreakfastMenu(breakfastMenu);
+                    // also add the menu item to the category
                     breakfastMenu.getMenuItems().add(menuItem);
                     breakfastMenuRepository.save(breakfastMenu);
                     return  "New Menu Added Successfully!";
