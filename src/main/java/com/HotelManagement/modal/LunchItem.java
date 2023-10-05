@@ -1,7 +1,6 @@
 package com.HotelManagement.modal;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,8 +11,14 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "LunchItem")
 public class LunchItem {
-    private Long lunchItemId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String name;
     private String description;
     private double price;
+
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private LunchCategory category;
 }

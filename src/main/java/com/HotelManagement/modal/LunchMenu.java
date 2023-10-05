@@ -1,7 +1,6 @@
 package com.HotelManagement.modal;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,8 +13,12 @@ import java.util.List;
 @Entity
 @Table(name="LunchMenu")
 public class LunchMenu {
-    private Long lunchMenId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String name;
     private String description;
-    private List<LunchItem> items;
+
+    @OneToMany(mappedBy = "menu", cascade = CascadeType.ALL)
+    private List<LunchCategory> lunchCategories;
 }
