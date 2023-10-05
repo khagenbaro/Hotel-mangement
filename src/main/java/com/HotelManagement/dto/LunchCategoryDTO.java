@@ -10,4 +10,5 @@ public class LunchCategoryDTO{
     private String name;
     private String description;
     private List<LunchItem> lunchItems;
+
 }
