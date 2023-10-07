@@ -20,5 +20,7 @@ public class LunchItem {
 
     @ManyToOne
     @JoinColumn(name = "category_id")
-    private LunchCategory category;
+    private LunchCategory lunchCategory;
+
+
 }

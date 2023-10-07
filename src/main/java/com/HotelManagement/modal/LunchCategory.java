@@ -19,7 +19,12 @@ public class LunchCategory {
     private String name;
     private String description;
 
-    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
-    private List<LunchItem> lunchItems;
+    @OneToMany(mappedBy = "lunchCategory", cascade = CascadeType.ALL)
+    private List<LunchItem> lunchItemList;
+
+    @ManyToOne
+    @JoinColumn(name = "menu_id")
+    private LunchMenu lunchMenu;
+
 
 }

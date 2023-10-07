@@ -19,6 +19,6 @@ public class LunchMenu {
     private String name;
     private String description;
 
-    @OneToMany(mappedBy = "menu", cascade = CascadeType.ALL)
-    private List<LunchCategory> lunchCategories;
+    @OneToMany(mappedBy = "lunchMenu", cascade = CascadeType.ALL)
+    private List<LunchCategory> lunchCategoryList;
 }

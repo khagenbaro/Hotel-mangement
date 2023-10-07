@@ -11,7 +11,7 @@ public class LunchItemMapper {
         LunchItem lunchItem = new LunchItem();
 
         lunchItem.setName(lunchItemDTO.getName());
-        lunchItem.setCategory(lunchItemDTO.getCategory());
+        lunchItem.setLunchCategory(lunchItemDTO.getLunchCategory());
         lunchItem.setPrice(lunchItemDTO.getPrice());
         lunchItem.setDescription(lunchItemDTO.getDescription());
 
@@ -23,7 +23,7 @@ public class LunchItemMapper {
         LunchItemDTO lunchItemDTO = new LunchItemDTO();
 
         lunchItemDTO.setName(lunchItemDTO.getName());
-        lunchItemDTO.setCategory(lunchItemDTO.getCategory());
+        lunchItemDTO.setLunchCategory(lunchItemDTO.getLunchCategory());
         lunchItemDTO.setPrice(lunchItemDTO.getPrice());
         lunchItemDTO.setDescription(lunchItemDTO.getDescription());
 

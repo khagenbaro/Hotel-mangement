@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 public interface LunchServices {
     String addLunchMenu(LunchMenuDTO lunchMenuDTO);
 
+    LunchMenuDTO updateLunchMenu(LunchMenuDTO lunchMenuDTO);
+
     LunchCategoryDTO addLunchCategory();
 
 }

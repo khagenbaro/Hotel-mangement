@@ -12,7 +12,8 @@ public class LunchCategoryMapper {
 
         lunchCategory.setName(lunchCategoryDTO.getName());
         lunchCategory.setDescription(lunchCategoryDTO.getDescription());
-        lunchCategory.setLunchItems(lunchCategoryDTO.getLunchItems());
+        lunchCategory.setLunchMenu(lunchCategoryDTO.getLunchMenu());
+        lunchCategory.setLunchItemList(lunchCategoryDTO.getLunchItemList());
 
         return lunchCategory;
     }
@@ -24,6 +25,7 @@ public class LunchCategoryMapper {
         lunchCategoryDTO.setName(lunchCategoryDTO.getName());
         lunchCategoryDTO.setDescription(lunchCategoryDTO.getDescription());
         lunchCategoryDTO.setLunchItems(lunchCategoryDTO.getLunchItems());
+        lunchCategoryDTO.setLunchMenu(lunchCategoryDTO.getLunchMenu());
 
         return lunchCategoryDTO;
     }
