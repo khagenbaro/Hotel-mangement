@@ -5,6 +5,7 @@ import com.HotelManagement.services.LunchServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,7 +16,7 @@ public class LunchController {
     private LunchServices lunchServices;
 
     @PostMapping("/addLunchMenu")
-    public ResponseEntity<String> addLunchMenu(LunchMenuDTO lunchMenuDTO){
+    public ResponseEntity<String> addLunchMenu(@RequestBody LunchMenuDTO lunchMenuDTO){
         return ResponseEntity.ok(lunchServices.addLunchMenu(lunchMenuDTO));
     }
 }
