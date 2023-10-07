@@ -1,8 +1,10 @@
 package com.HotelManagement.services.impl;
 
 import com.HotelManagement.dto.LunchCategoryDTO;
+import com.HotelManagement.dto.LunchItemDTO;
 import com.HotelManagement.dto.LunchMenuDTO;
 import com.HotelManagement.modal.LunchCategory;
+import com.HotelManagement.modal.LunchItem;
 import com.HotelManagement.modal.LunchMenu;
 import com.HotelManagement.repository.lunch.LunchCategoryRepository;
 import com.HotelManagement.repository.lunch.LunchItemRepository;
@@ -33,9 +35,34 @@ public class LunchServicesImpl implements LunchServices {
         try{
             lunchMenu.setName(lunchMenuDTO.getName());
             lunchMenu.setDescription(lunchMenuDTO.getDescription());
-            lunchMenu.setLunchCategoryList(lunchMenuDTO.getLunchCategoryList());
-            lunchMenu.getLunchCategoryList().addAll(lunchMenuDTO.getLunchCategoryList());
-            List<LunchCategory> lunchCategoryList = lunchMenu.getLunchCategoryList();
+            List<LunchCategory> lunchCategories = new ArrayList<>();
+
+            for (LunchCategory category : lunchMenuDTO.getLunchCategoryList()) {
+                LunchCategory lunchCategory = new LunchCategory();
+                lunchCategory.setName(category.getName());
+                lunchCategory.setDescription(category.getDescription());
+
+                List<LunchItem> lunchItems = new ArrayList<>();
+
+                for (LunchItem item : category.getLunchItemList()) {
+                    LunchItem lunchItem = new LunchItem();
+                    lunchItem.setName(item.getName());
+                    lunchItem.setDescription(item.getDescription());
+                    lunchItem.setPrice(item.getPrice());
+                    // Set the LunchItem's LunchCategory
+                    lunchItem.setLunchCategory(lunchCategory);
+                    lunchItems.add(lunchItem);
+                }
+
+                // Set the LunchCategory's LunchItems
+                lunchCategory.setLunchItemList(lunchItems);
+                // Set the LunchCategory's LunchMenu
+                lunchCategory.setLunchMenu(lunchMenu);
+                lunchCategories.add(lunchCategory);
+            }
+
+            // Set the LunchMenu's LunchCategories
+            lunchMenu.setLunchCategoryList(lunchCategories);
 
             lunchMenuRepository.save(lunchMenu);
             return "Lunch menu added successfully";
