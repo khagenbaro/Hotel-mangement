@@ -2,6 +2,7 @@ package com.HotelManagement.services.impl;
 
 import com.HotelManagement.dto.LunchCategoryDTO;
 import com.HotelManagement.dto.LunchMenuDTO;
+import com.HotelManagement.mapper.LunchMenuMapper;
 import com.HotelManagement.modal.LunchCategory;
 import com.HotelManagement.modal.LunchItem;
 import com.HotelManagement.modal.LunchMenu;
@@ -21,9 +22,12 @@ public class LunchServicesImpl implements LunchServices {
     @Autowired
     LunchMenuRepository lunchMenuRepository;
     @Autowired
-    LunchItemRepository lunchItemRepository;
+    private LunchItemRepository lunchItemRepository;
     @Autowired
-    LunchCategoryRepository lunchCategoryRepository;
+    private LunchCategoryRepository lunchCategoryRepository;
+
+    @Autowired
+    private LunchMenuMapper lunchMenuMapper;
     @Override
     public String addLunchMenu(LunchMenuDTO lunchMenuDTO) {
 
@@ -96,6 +100,39 @@ public class LunchServicesImpl implements LunchServices {
         }
 
     }
+
+    @Override
+    public String deleteLunchMenu(long id) {
+        try {
+            Optional<LunchMenu> lunchMenuOptional = lunchMenuRepository.findById(id);
+            if(lunchMenuOptional.isEmpty()){
+                return "Menu id does not exists";
+            }else{
+                LunchMenu lunchMenu = lunchMenuOptional.get();
+                lunchMenuRepository.delete(lunchMenu);
+                return lunchMenu.getName() + "Lunch Menu has been deleted successfully";
+            }
+        }
+        catch (Exception e){
+            throw new RuntimeException(e.getMessage());
+        }
+    }
+
+    @Override
+    public List<LunchMenuDTO> getAllLunchMenu() {
+        List<LunchMenuDTO> lunchMenuDTOList= new ArrayList<>();
+        List<LunchMenu> lunchMenu =  lunchMenuRepository.findAll();
+        for(LunchMenu item: lunchMenu ){
+            lunchMenuDTOList.add(lunchMenuMapper.entityToDto(item));
+        }
+        return lunchMenuDTOList;
+    }
+
+    @Override
+    public LunchMenuDTO getLunchMenuById(long id) {
+        return null;
+    }
+
 
     @Override
     public LunchCategoryDTO addLunchCategory() {

@@ -6,14 +6,14 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class LunchMenuMapper {
-    LunchMenuDTO entityToDto(LunchMenu lunchMenu){
+    public LunchMenuDTO entityToDto(LunchMenu lunchMenu){
         LunchMenuDTO lunchMenuDTO = new LunchMenuDTO();
         lunchMenuDTO.setName(lunchMenu.getName());
         lunchMenuDTO.setLunchCategoryList(lunchMenu.getLunchCategoryList());
         lunchMenuDTO.setDescription(lunchMenu.getDescription());
         return  lunchMenuDTO;
     }
-    LunchMenu entityToDto(LunchMenuDTO lunchMenuDto){
+    public LunchMenu entityToDto(LunchMenuDTO lunchMenuDto){
         LunchMenu lunchMenu = new LunchMenu();
         lunchMenu.setName(lunchMenuDto.getName());
         lunchMenu.setLunchCategoryList(lunchMenuDto.getLunchCategoryList());

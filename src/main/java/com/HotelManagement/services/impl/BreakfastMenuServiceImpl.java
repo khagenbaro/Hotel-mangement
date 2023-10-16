@@ -5,7 +5,7 @@ import com.HotelManagement.mapper.MenuItemMapper;
 import com.HotelManagement.modal.BreakfastMenu;
 import com.HotelManagement.modal.MenuItem;
 import com.HotelManagement.repository.BreakfastMenuRepository;
-import com.HotelManagement.repository.MenuRepository;
+import com.HotelManagement.repository.BreakfastMenuItemRepository;
 import com.HotelManagement.services.BreakfastMenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,7 +20,7 @@ public class BreakfastMenuServiceImpl implements BreakfastMenuService {
     @Autowired
     private BreakfastMenuRepository breakfastMenuRepository;
     @Autowired
-    private MenuRepository menuRepository;
+    private BreakfastMenuItemRepository breakfastMenuItemRepository;
     @Autowired
     private MenuItemMapper menuItemMapper;
     @Override
@@ -78,9 +78,9 @@ public class BreakfastMenuServiceImpl implements BreakfastMenuService {
 
     @Override
     public String deleteBreakfastMenu(long id) {
-        Optional<MenuItem> menuItemOptional = menuRepository.findById(id);
+        Optional<MenuItem> menuItemOptional = breakfastMenuItemRepository.findById(id);
         if(menuItemOptional.isPresent()){
-            menuRepository.deleteById(id);
+            breakfastMenuItemRepository.deleteById(id);
             return  "Menu Item has been deleted !";
         }
         else {
@@ -90,24 +90,24 @@ public class BreakfastMenuServiceImpl implements BreakfastMenuService {
 
     @Override
     public MenuItemDTO updateMenuItem(long id, MenuItemDTO menuItemDTO) {
-        Optional<MenuItem> menuItem = menuRepository.findById(id);
+        Optional<MenuItem> menuItem = breakfastMenuItemRepository.findById(id);
         if(menuItem.isPresent()){
             MenuItem menuItem2 = menuItem.get();
             menuItem2.setItemName(menuItemDTO.getItemName());
             menuItem2.setPrice(menuItemDTO.getPrice());
             menuItem2.setDescription(menuItemDTO.getDescription());
             menuItem2.setBreakfastMenu(menuItem.get().getBreakfastMenu());
-            menuRepository.save(menuItem2);
+            breakfastMenuItemRepository.save(menuItem2);
             return menuItemMapper.entityToDTO(menuItem2);
         }else {
-            throw new RuntimeException("Something happened");
+            throw new RuntimeException("Something error happened can't update");
         }
     }
 
     @Override
     public List<MenuItemDTO> getAllBreakfastMenu() {
         List<MenuItemDTO>  menuItemDTOList = new ArrayList<>();
-        List<MenuItem> menuItemList = menuRepository.findAll();
+        List<MenuItem> menuItemList = breakfastMenuItemRepository.findAll();
         if(!menuItemList.isEmpty()){
             for(MenuItem item : menuItemList){
                 menuItemDTOList.add(menuItemMapper.entityToDTO(item));
