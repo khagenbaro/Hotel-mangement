@@ -1,7 +1,6 @@
 package com.HotelManagement.services.impl;
 
 import com.HotelManagement.dto.LunchCategoryDTO;
-import com.HotelManagement.dto.LunchItemDTO;
 import com.HotelManagement.dto.LunchMenuDTO;
 import com.HotelManagement.modal.LunchCategory;
 import com.HotelManagement.modal.LunchItem;
@@ -15,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class LunchServicesImpl implements LunchServices {
@@ -74,8 +74,27 @@ public class LunchServicesImpl implements LunchServices {
     }
 
     @Override
-    public LunchMenuDTO updateLunchMenu(LunchMenuDTO lunchMenuDTO) {
-        return null;
+    public String updateLunchMenu(long id, LunchMenuDTO lunchMenuDTO) {
+        try{
+            // fetch lunch menu from the repo by id
+            Optional<LunchMenu> lunchMenuOptional=  lunchMenuRepository.findById(id);
+            if(lunchMenuOptional.isEmpty()){
+                // if lunch menu does not exist by id return
+                return "Lunch menu id does not exist";
+            }
+            else{
+                // if lunch menu exists update the menu
+                LunchMenu lunchMenu= lunchMenuOptional.get();
+                lunchMenu.setName(lunchMenuDTO.getName());
+                lunchMenu.setDescription(lunchMenuDTO.getDescription());
+                lunchMenu.setLunchCategoryList(lunchMenuDTO.getLunchCategoryList());
+                return "Lunch menu is updated ";
+            }
+        }
+        catch (Exception e){
+            throw  new RuntimeException(e.getMessage());
+        }
+
     }
 
     @Override

@@ -4,10 +4,7 @@ import com.HotelManagement.dto.LunchMenuDTO;
 import com.HotelManagement.services.LunchServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController()
 @RequestMapping("/lunch")
@@ -16,7 +13,12 @@ public class LunchController {
     private LunchServices lunchServices;
 
     @PostMapping("/addLunchMenu")
-    public ResponseEntity<String> addLunchMenu(@RequestBody LunchMenuDTO lunchMenuDTO){
+    public ResponseEntity<java.lang.String> addLunchMenu(@RequestBody LunchMenuDTO lunchMenuDTO){
         return ResponseEntity.ok(lunchServices.addLunchMenu(lunchMenuDTO));
     }
+    @PutMapping("/updateLunchMenu")
+    public ResponseEntity<String>  updateLunchMenu(@RequestParam long id , @RequestBody LunchMenuDTO lunchMenuDTO){
+        return ResponseEntity.ok(lunchServices.updateLunchMenu(id,lunchMenuDTO));
+    }
+
 }

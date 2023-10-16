@@ -6,8 +6,11 @@ import lombok.Data;
 import java.util.List;
 
 @Data
+
 public class LunchMenuDTO {
-    private String name;
-    private String description;
-    private List<LunchCategory> lunchCategoryList;
+
+        private String name;
+        private String description;
+        private List<LunchCategory> lunchCategoryList;
+
 }
