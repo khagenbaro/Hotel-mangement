@@ -2,7 +2,6 @@ package com.HotelManagement.Controller;
 
 import com.HotelManagement.dto.LunchMenuDTO;
 import com.HotelManagement.services.LunchServices;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,7 +24,8 @@ public class LunchController {
     }
     @GetMapping("/getAllLunchMenu")
     public ResponseEntity<List<LunchMenuDTO>> getAllLunchMenu(){
-        return ResponseEntity.ok(lunchServices.getAllLunchMenu());
+        List<LunchMenuDTO> lunchMenuDTOList = lunchServices.getAllLunchMenu();
+        return ResponseEntity.ok(lunchMenuDTOList);
     }
 
 }

@@ -1,5 +1,6 @@
 package com.HotelManagement.modal;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,6 +18,7 @@ public class LunchItem {
     private String name;
     private String description;
     private double price;
+
 
     @ManyToOne
     @JoinColumn(name = "category_id")

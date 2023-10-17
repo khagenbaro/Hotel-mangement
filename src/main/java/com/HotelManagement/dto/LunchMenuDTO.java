@@ -9,6 +9,6 @@ public class LunchMenuDTO {
 
         private String name;
         private String description;
-        private List<LunchCategory> lunchCategoryList;
+        private List<LunchCategoryDTO> lunchCategoryList;
 
 }

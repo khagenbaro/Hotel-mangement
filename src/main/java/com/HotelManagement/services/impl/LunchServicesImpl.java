@@ -1,6 +1,7 @@
 package com.HotelManagement.services.impl;
 
 import com.HotelManagement.dto.LunchCategoryDTO;
+import com.HotelManagement.dto.LunchItemDTO;
 import com.HotelManagement.dto.LunchMenuDTO;
 import com.HotelManagement.mapper.LunchMenuMapper;
 import com.HotelManagement.modal.LunchCategory;
@@ -41,14 +42,14 @@ public class LunchServicesImpl implements LunchServices {
             lunchMenu.setDescription(lunchMenuDTO.getDescription());
             List<LunchCategory> lunchCategories = new ArrayList<>();
 
-            for (LunchCategory category : lunchMenuDTO.getLunchCategoryList()) {
+            for (LunchCategoryDTO category : lunchMenuDTO.getLunchCategoryList()) {
                 LunchCategory lunchCategory = new LunchCategory();
                 lunchCategory.setName(category.getName());
                 lunchCategory.setDescription(category.getDescription());
 
                 List<LunchItem> lunchItems = new ArrayList<>();
 
-                for (LunchItem item : category.getLunchItemList()) {
+                for (LunchItemDTO item : category.getLunchItemList()) {
                     LunchItem lunchItem = new LunchItem();
                     lunchItem.setName(item.getName());
                     lunchItem.setDescription(item.getDescription());
@@ -91,7 +92,7 @@ public class LunchServicesImpl implements LunchServices {
                 LunchMenu lunchMenu= lunchMenuOptional.get();
                 lunchMenu.setName(lunchMenuDTO.getName());
                 lunchMenu.setDescription(lunchMenuDTO.getDescription());
-                lunchMenu.setLunchCategoryList(lunchMenuDTO.getLunchCategoryList());
+                //lunchMenu.setLunchCategoryList(lunchMenuDTO.getLunchCategoryList());
                 return "Lunch menu is updated ";
             }
         }
@@ -123,7 +124,7 @@ public class LunchServicesImpl implements LunchServices {
         List<LunchMenuDTO> lunchMenuDTOList= new ArrayList<>();
         List<LunchMenu> lunchMenu =  lunchMenuRepository.findAll();
         for(LunchMenu item: lunchMenu ){
-            lunchMenuDTOList.add(lunchMenuMapper.entityToDto(item));
+            lunchMenuDTOList.add(lunchMenuMapper.toDTO(item));
         }
         return lunchMenuDTOList;
     }

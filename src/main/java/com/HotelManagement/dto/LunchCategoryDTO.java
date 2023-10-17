@@ -12,7 +12,7 @@ public class LunchCategoryDTO{
     private String description;
     private List<LunchItem> lunchItems;
 
-    private List<LunchItem> lunchItemList;
+    private List<LunchItemDTO> lunchItemList;
 
     private LunchMenu lunchMenu;
 

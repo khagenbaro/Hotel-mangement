@@ -1,5 +1,6 @@
 package com.HotelManagement.modal;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -22,9 +23,11 @@ public class LunchCategory {
     @OneToMany(mappedBy = "lunchCategory", cascade = CascadeType.ALL)
     private List<LunchItem> lunchItemList;
 
+
     @ManyToOne
     @JoinColumn(name = "menu_id")
     private LunchMenu lunchMenu;
+
 
 
 }
