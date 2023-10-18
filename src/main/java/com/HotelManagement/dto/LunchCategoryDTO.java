@@ -14,6 +14,4 @@ public class LunchCategoryDTO{
 
     private List<LunchItemDTO> lunchItemList;
 
-    private LunchMenu lunchMenu;
-
 }

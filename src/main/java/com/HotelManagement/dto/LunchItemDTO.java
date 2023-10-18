@@ -8,5 +8,4 @@ public class LunchItemDTO {
     private String name;
     private String description;
     private double price;
-    private LunchCategory lunchCategory;
 }
